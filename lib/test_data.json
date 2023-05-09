@@ -1,0 +1,15 @@
+{
+  "patients" : [
+    {"first_name": "mon", "last_name": "patient", "cell":  "+573209196254"},
+    {"first_name": "max", "last_name": "walters", "cell":  "+573209196254"},
+    {"first_name": "greg", "last_name": "laporte", "cell":  "+573209196254"},
+    {"first_name": "john", "last_name": "smith", "cell":  "+573209196254"}
+  ],
+  "providers" : [
+    {"first_name": "john", "last_name": "smith", "cell":  "+573209196254"},
+    {"first_name": "david", "last_name": "summers", "cell":  "+573209196254"},
+    {"first_name": "luis", "last_name": "gomez", "cell":  "+573209196254"}
+  ]
+}
+
+
