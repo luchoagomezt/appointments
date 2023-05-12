@@ -1,4 +1,5 @@
 from pytest import mark
+from datetime import datetime
 from lib.entities import is_there_a_patient_with_this_name
 from lib.entities import retrieve_patient_by_name
 from lib.entities import is_there_a_provider_with_this_name
@@ -22,7 +23,7 @@ def validate_provider_is_registered(full_name: dict, data_storage=DataStorage) -
         assert False, f"provider {full_name['first_name']} {full_name['last_name']} is not registered"
 
 
-@mark.skip(reason="this does not pass in git hub")
+#@mark.skip(reason="this does not pass in git hub")
 def test_story_one():
     storage = JsonDataStorage("lib/test_data.json")
 
@@ -31,7 +32,7 @@ def test_story_one():
     validate_patient_is_registered(patient_s_name, storage)
     validate_provider_is_registered(provider_s_name, storage)
 
-    appointment_date = "13:30:00 05-11-2023"
+    appointment_date = str(datetime(day=11, month=5, year=2023, hour=13, minute=30))
 
     a_patient = retrieve_patient_by_name(first_name=patient_s_name["first_name"], last_name=patient_s_name["last_name"],
                                          data_storage=storage)
