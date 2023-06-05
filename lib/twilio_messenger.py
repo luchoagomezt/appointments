@@ -1,16 +1,13 @@
 from twilio.rest import Client
 
 
-class TwilioMessenger:
-    def __init__(self):
-        self.account_sid = 'ACcbf07f2c0b208633293cd1694331ed22'
-        self.auth_token = '4ac081e0a06220b4c1ce630c042ec65a'
-        self.client = Client(self.account_sid, self.auth_token)
-
-    def send_sms_message(self, to: str, message: str) -> bool:
-        msg = self.client.messages.create(
-            body=message,
-            from_="+16205089020",
-            to="+573209196254"
-        )
-        return msg.sid is not None
+def send_sms_message(message: str, to: str = "+573209196254") -> bool:
+    account_sid = 'ACcbf07f2c0b208633293cd1694331ed22'
+    auth_token = '1ebd44c245b18a05c3b57fb5bfcffb55'
+    client = Client(account_sid, auth_token)
+    msg = client.messages.create(
+        body=message,
+        from_="+16205089020",
+        to=to
+    )
+    return msg.sid is not None

@@ -4,7 +4,7 @@ from twilio.rest import Client
 # Set environment variables for your credentials
 # Read more at http://twil.io/secure
 account_sid = "ACcbf07f2c0b208633293cd1694331ed22"
-auth_token = "a33034b421e763f8296d46b4c2fc1804"
+auth_token = '1ebd44c245b18a05c3b57fb5bfcffb55'
 client = Client(account_sid, auth_token)
 message = client.messages.create(
   body="Hello from Twilio",
