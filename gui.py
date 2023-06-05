@@ -10,6 +10,7 @@ import secrets
 from lib.entities import is_there_a_patient_with_this_name
 from lib.entities import is_there_a_provider_with_this_name
 from lib.json_data_storage import JsonDataStorage
+from lib.twilio_messenger import send_sms_message
 
 app = Flask(__name__)
 
@@ -35,32 +36,32 @@ class SearchForm(FlaskForm):
 class AppointmentInformation(FlaskForm):
     appointment_date_time = DateTimeField('time and date', validators=[DataRequired()])
     submit = SubmitField('Submit')
+    #send_sms_message(message=f"your appointment has been confirm for {appointment_date_time}")
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     search_form = SearchForm()
-
-    message = ""
     appointment_form = AppointmentInformation()
-    valid = False
+    message = ""
 
     if search_form.validate_on_submit():
         valid_patient = is_there_a_patient_with_this_name(first_name=search_form.patient_first_name.data.lower(),
                                                           last_name=search_form.patient_last_name.data.lower(),
                                                           data_storage=JsonDataStorage("lib/test_data.json"))
-        patient_message = "" if valid_patient else "Patient is NOT registered"
 
         valid_provider = is_there_a_provider_with_this_name(first_name=search_form.provider_first_name.data.lower(),
                                                             last_name=search_form.provider_last_name.data.lower(),
                                                             data_storage=JsonDataStorage("lib/test_data.json"))
+
+        patient_message = "" if valid_patient else "Patient is NOT registered"
         provider_message = "" if valid_provider else "Provider is NOT registered"
-        message = patient_message.join(provider_message)
-        valid = valid_patient and valid_provider
+        message = patient_message + " " + provider_message
 
-        # if valid:
-        #     return render_template('appointment.html', appointment_form=appointment_form, message=message)
+        if valid_patient and valid_provider:
+            return render_template('appointment.html', appointment_form=appointment_form)
 
+    search_form = SearchForm()
     return render_template('index.html', search_form=search_form, message=message)
 
 

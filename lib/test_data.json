@@ -7,7 +7,7 @@
   ],
   "providers" : [
     {"first_name": "john", "last_name": "smith", "cell":  "+573209196254"},
-    {"first_name": "david", "last_name": "summers", "cell":  "+573209196254"},
+    {"first_name": "david", "last_name": "summers", "cell": "+573209196254"},
     {"first_name": "luis", "last_name": "gomez", "cell":  "+573209196254"}
   ]
 }
