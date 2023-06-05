@@ -51,7 +51,7 @@ class DataStorage(Protocol):
         ...
 
 
-def send_appointment_alert(appointment: Appointment, client: Messenger) -> bool:
+def send_appointment_alert(appointment: Appointment, client) -> bool:
     """
     Sends an appointment alert via the messenger to both the provider and patient
     :param appointment: The appointment.
@@ -59,7 +59,7 @@ def send_appointment_alert(appointment: Appointment, client: Messenger) -> bool:
     :return:
     """
     msg = f"Hello {appointment.patient.first_name} {appointment.patient.last_name} Confirming your {appointment.date} appointment"
-    return client.send_sms_message(to="+573209196254", message=msg)
+    return client(message=msg)
 
 
 def is_there_a_patient_with_this_name(first_name: str, last_name: str, data_storage: DataStorage) -> bool:

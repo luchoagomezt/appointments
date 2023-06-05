@@ -8,7 +8,7 @@ from lib.entities import Appointment
 from lib.entities import DataStorage
 from lib.entities import send_appointment_alert
 from lib.json_data_storage import JsonDataStorage
-from lib.twilio_messenger import TwilioMessenger
+from lib.twilio_messenger import send_sms_message
 
 
 def validate_patient_is_registered(full_name: dict, data_storage=DataStorage) -> None:
@@ -21,7 +21,6 @@ def validate_provider_is_registered(full_name: dict, data_storage=DataStorage) -
     if not is_there_a_provider_with_this_name(first_name=full_name["first_name"], last_name=full_name["last_name"],
                                               data_storage=data_storage):
         assert False, f"provider {full_name['first_name']} {full_name['last_name']} is not registered"
-
 
 
 def test_story_one():
@@ -41,5 +40,5 @@ def test_story_one():
                                            data_storage=storage)
 
     an_appointment = Appointment(date=appointment_date, patient=a_patient, provider=a_provider)
-    assert send_appointment_alert(appointment=an_appointment, client=TwilioMessenger()), \
+    assert send_appointment_alert(appointment=an_appointment, client=send_sms_message), \
         f"Failed to send SMS to provider and patient"
