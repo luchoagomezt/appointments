@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing-extensions import Protocol
+from typing import Protocol
 
 
 @dataclass()
